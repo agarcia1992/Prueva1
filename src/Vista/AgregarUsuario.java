@@ -36,7 +36,7 @@ public class AgregarUsuario {
 	JTextField txtFecha_Nacimiento = new JTextField();
 	usuario usu = new usuario();
 	UsuariosDAO usuDAO = new UsuariosDAO();
-	usuarios usu2 = new usuarios();
+	
 	
 	
 	private void VenAgregarUsuarios() {
@@ -142,6 +142,7 @@ public class AgregarUsuario {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+		
 			String Nombre = txtNombre.getText();
 			String Apellido = txtApellido.getText();
 			String Telefono = txtTelefono.getText();
@@ -164,6 +165,10 @@ public class AgregarUsuario {
 				usu.setContrasenia(Contraseña);
 				usuDAO.AgregarUsuario(usu);
 				JOptionPane.showMessageDialog(null, "Datos ingresados Correctamente");
+				LimpiarTabla();
+				usuarios usu2 = new usuarios();
+				usu2.
+				
 				}
 			}
 				
@@ -174,8 +179,8 @@ public class AgregarUsuario {
 	
 	public void LimpiarTabla()
     {
-       for (int i = 0; i < .getRowCount(); i++) {
-          tablapro.removeRow(i);
+       for (int i = 0; i <usu2.modelo.getRowCount(); i++) {
+          usu2.modelo.removeRow(i);
           i=i-1;
        }
     }
