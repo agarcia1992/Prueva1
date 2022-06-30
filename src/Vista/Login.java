@@ -29,6 +29,7 @@ public class Login {
 	JButton btnIncioSession = new JButton();
 	String Qnombre;
 	String Qapellido;
+	int QRol = 0;
 	int contador=1;
 	
 	
@@ -66,7 +67,7 @@ private void inicio_session() throws IOException{
 public void login() {
 	String Qusuario = null;
 	String Qcontrasena = null;
-	String consulta = "Select nombre, apellido, correo_electronico, contrasenia from usuarios where correo_electronico = '"+txtUsuario.getText()+"'";
+	String consulta = "Select nombre, apellido, correo_electronico, id_rol, contrasenia from usuarios where correo_electronico = '"+txtUsuario.getText()+"'";
 	try {
 		stmt = reg.createStatement();
 		rs = stmt.executeQuery(consulta);
@@ -75,13 +76,14 @@ public void login() {
 				Qcontrasena = rs.getString("contrasenia");
 				Qnombre = rs.getString("nombre");
 				Qapellido = rs.getString("apellido");
+				QRol = rs.getInt("id_rol");
 			}
 	} catch (Exception e) {
 		
 	}	
 	String usuario = txtUsuario.getText();
 	String contrasena = txtContraseña.getText();
-	System.out.println(Qusuario+" "+Qcontrasena);
+	System.out.println(Qusuario+" "+Qcontrasena+" "+QRol);
 	
 	if(usuario.isBlank() || contrasena.isBlank()) {
 		JOptionPane.showMessageDialog(null, "Ingresa un usuario y contraseña.");
@@ -91,6 +93,7 @@ public void login() {
 			JOptionPane.showMessageDialog(null, "Bienvenido");
 			jf_principal.setVisible(false);
 			usuarios usu = new usuarios();
+			usu.rol = QRol;
 			usu.nombre = Qnombre;
 			usu.apellido = Qapellido;
 			usu.ejecutar();
